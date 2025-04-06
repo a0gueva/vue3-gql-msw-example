@@ -1,8 +1,14 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-if (import.meta.env.DEV) {
-  import('./mocks/browser').then(({ worker }) => worker.start())
+async function bootstrap() {
+  const { worker } = await import('./mocks/browser')
+  await worker.start({
+    onUnhandledRequest: 'bypass'
+  })
+  console.log('[MSW] ✅ Mock Service Worker started')
+
+  createApp(App).mount('#app')
 }
 
-createApp(App).mount('#app')
+bootstrap()

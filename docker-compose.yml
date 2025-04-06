@@ -4,12 +4,8 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: Dockerfile
     container_name: vue3-msw-app
     ports:
       - "4173:4173"
-    volumes:
-      - .:/app
-      - /app/node_modules
     environment:
       - NODE_ENV=production

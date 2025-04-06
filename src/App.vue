@@ -8,8 +8,7 @@
 </template>
 
 <script setup>
-import { useQuery } from '@apollo/client/core'
-import { provideApolloClient } from '@vue/apollo-composable'
+import { useQuery, provideApolloClient } from '@vue/apollo-composable'
 import { ApolloClient, InMemoryCache } from '@apollo/client/core'
 import { GET_PRODUCT } from './queries/getProduct'
 

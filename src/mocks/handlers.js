@@ -2,12 +2,12 @@ import { graphql } from 'msw'
 
 export const handlers = [
   graphql.query('GetProduct', (req, res, ctx) => {
-    const { id } = req.variables
+    console.log('[MSW] 🧪 Intercepted GetProduct', req.variables);
     return res(
       ctx.data({
         product: {
-          id,
-          name: `Mock Product #${id}`
+          id: req.variables.id,
+          name: `Mock Product #${req.variables.id}`
         }
       })
     )
