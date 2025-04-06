@@ -1,15 +1,10 @@
 import { graphql } from 'msw'
+import { loadMockProduct } from './utils/loadMockProduct'
 
 export const handlers = [
-  graphql.query('GetProduct', (req, res, ctx) => {
-    console.log('[MSW] 🧪 Intercepted GetProduct', req.variables);
-    return res(
-      ctx.data({
-        product: {
-          id: req.variables.id,
-          name: `Mock Product #${req.variables.id}`
-        }
-      })
-    )
+  graphql.query('GetProduct', async (req, res, ctx) => {
+    const { id } = req.variables
+    const base = await loadMockProduct(id)
+    return res(ctx.data({ product: base }))
   })
 ]

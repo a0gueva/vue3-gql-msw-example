@@ -1,12 +1,11 @@
 {
-  "name": "vue3-graphql-msw-app-final",
+  "name": "vue3-apollo-msw-playwright",
   "version": "1.0.0",
   "scripts": {
-    "dev": "npm run msw:init && vite",
-    "build": "npm run msw:init && vite build",
-    "serve": "serve -s dist -l 4173",
-    "msw:init": "msw init public/ --save",
-    "test": "vitest"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "playwright test"
   },
   "dependencies": {
     "vue": "^3.3.0",
@@ -16,9 +15,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
-    "msw": "^1.2.1",
     "vite": "^4.0.0",
-    "vitest": "^0.34.0",
-    "serve": "^14.2.0"
+    "msw": "^1.2.1",
+    "playwright": "^1.43.1"
   }
 }

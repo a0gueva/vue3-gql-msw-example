@@ -1,9 +1,12 @@
 <template>
   <div>
-    <h1>Mocked Product</h1>
+    <h1>Product Info</h1>
     <p v-if="loading">Loading...</p>
     <p v-if="error">Error: {{ error.message }}</p>
-    <p v-if="data">Product: {{ data.product.name }}</p>
+    <p v-if="data">
+      Name: {{ data.product.name }}<br />
+      ID: {{ data.product.id }}
+    </p>
   </div>
 </template>
 

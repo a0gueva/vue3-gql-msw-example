@@ -4,7 +4,7 @@ services:
   frontend:
     build:
       context: .
-    container_name: vue3-msw-app
+    container_name: vue3-apollo-msw-playwright
     ports:
       - "4173:4173"
     environment:
