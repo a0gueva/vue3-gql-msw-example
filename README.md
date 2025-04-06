@@ -1,1 +1,1 @@
-# vue3-gql-msw-example
+# Mock GraphQL gateway responses in dev and test using MSW.
