@@ -1,15 +1,18 @@
-FROM node:18-alpine
+FROM mcr.microsoft.com/playwright:v1.43.1-focal
 
 WORKDIR /app
 
+# Copy package files and install dependencies
 COPY package*.json ./
 RUN npm install
+RUN npx playwright install --with-deps
 
+# Copy the rest of the source code
 COPY . .
-RUN npm run build
 
-RUN npm install -g serve
+# Build the Vite app
+RUN npm run build
 
 EXPOSE 4173
 
-CMD ["serve", "-s", "dist", "-l", "4173"]
+CMD ["npx", "vite", "preview", "--host"]

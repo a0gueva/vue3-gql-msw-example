@@ -1,22 +1,24 @@
 {
-  "name": "vue3-apollo-msw-playwright",
+  "name": "vue3-apollo-msw-playwright-header",
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "msw:init": "msw init public/ --save",
+    "build": "npm run msw:init && vite build",
     "preview": "vite preview",
-    "test": "playwright test"
+    "test": "playwright test",
+    "test:ui": "playwright test --ui"
   },
   "dependencies": {
-    "vue": "^3.3.0",
     "@apollo/client": "^3.7.0",
     "@vue/apollo-composable": "^4.0.0",
-    "graphql": "^16.6.0"
+    "graphql": "^16.6.0",
+    "vue": "^3.3.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.43.1",
     "@vitejs/plugin-vue": "^4.0.0",
-    "vite": "^4.0.0",
     "msw": "^1.2.1",
-    "playwright": "^1.43.1"
+    "vite": "^4.0.0"
   }
 }

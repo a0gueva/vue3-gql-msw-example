@@ -1,34 +1,15 @@
-import { test, expect, request } from '@playwright/test'
+import { test, expect } from '@playwright/test'
 
-test('mutates mock response after real GraphQL call', async ({ baseURL }) => {
-  const reqContext = await request.newContext()
-  const response = await reqContext.post(`${baseURL}/graphql`, {
-    data: {
-      query: \`
-        query GetProduct($id: ID!) {
-          product(id: $id) {
-            id
-            name
-          }
-        }
-      \`,
-      variables: { id: "1" }
+test('renders enriched product via header override', async ({ page }) => {
+  await page.route('**/graphql', (route, request) => {
+    const headers = {
+      ...request.headers(),
+      'x-mock-overrides': 'price-override'
     }
+    route.continue({ headers })
   })
 
-  const json = await response.json()
-  const baseProduct = json.data.product
-
-  const enriched = {
-    ...baseProduct,
-    price: 49.99,
-    injectedBy: 'test'
-  }
-
-  console.log('[TEST] Enriched Product:', enriched)
-
-  expect(enriched).toMatchObject({
-    name: 'Mock Shoe',
-    price: 49.99
-  })
+  await page.goto('http://localhost:4173')
+  await expect(page.locator('h1')).toHaveText('Product Info')
+  await expect(page.locator('text=99.99')).toBeVisible()
 })
